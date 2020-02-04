@@ -1,0 +1,25 @@
+variables:
+  INPUT_FILE: "document.tex"
+  OUTPUT_FILE: "out/document"
+
+stages:
+  - test
+  - build
+
+lint:
+  image: danteev/texlive:TL2017
+  stage: test
+  script:
+    - chktex ${INPUT_FILE} -wall -n22 -n30 -e16 -n21
+  only:
+    - master
+  allow_failure: true
+
+build:
+  image: danteev/texlive:TL2017
+  stage: build
+  script:
+    - latexmk -jobname=${OUTPUT_FILE} -pdf ${INPUT_FILE}
+  artifacts:
+    paths:
+      - ${OUTPUT_FILE}.pdf
