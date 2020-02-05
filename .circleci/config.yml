@@ -1,0 +1,141 @@
+version: 2.1
+
+defaults: &defaults
+  working_directory: ~/repo
+  docker:
+    - image: circleci/node:12.14.1
+
+whitelist: &whitelist
+  paths:
+    - .npmignore
+    - coverage/*
+    - dist/*
+    - node_modules/*
+    - reports/*
+    - src/*
+    - .eslintignore
+    - .eslintrc.js
+    - .huskyrc.js
+    - .prettierignore
+    - .prettierrc.js
+    - .releaserc
+    - jest.config.js
+    - LICENSE.md
+    - lint-staged.config.js
+    - package.json
+    - README.md
+    - tsconfig.json
+
+orbs:
+  codecov: codecov/codecov@1.0.5
+
+jobs:
+  checkout:
+    <<: *defaults
+    steps:
+      - checkout
+      - restore_cache:
+          keys:
+            - v1-dependencies-{{ checksum "package.json" }}
+            - v1-dependencies-
+      - run:
+          name: Install Dependencies
+          command: npm ci
+      - save_cache:
+          paths:
+            - node_modules
+          key: v1-dependencies-{{ checksum "package.json" }}
+      - persist_to_workspace:
+          root: ~/repo
+          <<: *whitelist
+
+  commitlint:
+    <<: *defaults
+    steps:
+      - attach_workspace:
+          at: ~/repo
+      - run:
+          name: Lint relevant commit messages
+          command: npm run commitlint:ci
+
+  lint:
+    <<: *defaults
+    steps:
+      - attach_workspace:
+          at: ~/repo
+      - run:
+          name: Lint TypeScript code
+          command: npm run lint:ci
+      - persist_to_workspace:
+          root: ~/repo
+          paths:
+            - reports/eslint
+
+  test:
+    <<: *defaults
+    steps:
+      - attach_workspace:
+          at: ~/repo
+      - run:
+          name: Test TypeScript code
+          command: npm run test:ci
+      - persist_to_workspace:
+          root: ~/repo
+          paths:
+            - coverage
+            - reports/jest
+
+  codecov:
+    <<: *defaults
+    steps:
+      - attach_workspace:
+          at: ~/repo
+      - codecov/upload:
+          file: ./coverage/lcov.info
+
+  build:
+    <<: *defaults
+    steps:
+      - attach_workspace:
+          at: ~/repo
+      - run:
+          name: Build TypeScript code
+          command: npm run build
+      - persist_to_workspace:
+          root: ~/repo
+          <<: *whitelist
+      - store_test_results:
+          path: reports
+      - store_artifacts:
+          path: reports
+
+  release:
+    <<: *defaults
+    steps:
+      - attach_workspace:
+          at: ~/repo
+      - run: npx semantic-release
+
+workflows:
+  build:
+    jobs:
+      - checkout
+      - test:
+          requires:
+            - checkout
+      - lint:
+          requires:
+            - checkout
+      - codecov:
+          requires:
+            - test
+      - build:
+          requires:
+            - test
+            - lint
+      - release:
+          requires:
+            - build
+          filters:
+            branches:
+              only: master
