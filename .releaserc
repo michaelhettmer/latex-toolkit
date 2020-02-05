@@ -17,11 +17,7 @@
             "@semantic-release/git",
             {
                 "assets": [
-                    "dist",
-                    "docs",
-                    "templates",
-                    "package.json",
-                    "README.md"
+                    "dist/*"
                 ]
             }
         ],
@@ -29,11 +25,7 @@
             "@semantic-release/github",
             {
                 "assets": [
-                    "dist",
-                    "docs",
-                    "templates",
-                    "package.json",
-                    "README.md"
+                    "dist/*"
                 ],
                 "assignees": [
                     "MichaelHettmer"
