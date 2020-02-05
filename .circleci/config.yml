@@ -122,15 +122,15 @@ workflows:
   build:
     jobs:
       - checkout
-      - commitlint
       - test:
           requires:
-            - checkout
             - commitlint
       - lint:
           requires:
-            - checkout
             - commitlint
+      - commitlint:
+          requires:
+            - checkout
       - codecov:
           requires:
             - test
