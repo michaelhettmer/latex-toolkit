@@ -7,12 +7,14 @@ defaults: &defaults
 
 whitelist: &whitelist
   paths:
+    - .git/*
     - .npmignore
     - coverage/*
     - dist/*
     - node_modules/*
     - reports/*
     - src/*
+    - .commitlintrc.js
     - .eslintignore
     - .eslintrc.js
     - .huskyrc.js
@@ -120,12 +122,15 @@ workflows:
   build:
     jobs:
       - checkout
+      - commitlint
       - test:
           requires:
             - checkout
+            - commitlint
       - lint:
           requires:
             - checkout
+            - commitlint
       - codecov:
           requires:
             - test
