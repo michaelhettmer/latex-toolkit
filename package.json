@@ -8,6 +8,7 @@
         "cli",
         "template"
     ],
+    "private": true,
     "author": "Michael Hettmer",
     "license": "MIT",
     "homepage": "https://github.com/MichaelHettmer/latex-toolkit#readme",
