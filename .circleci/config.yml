@@ -124,10 +124,10 @@ workflows:
       - checkout
       - test:
           requires:
-            - commitlint
+            - checkout
       - lint:
           requires:
-            - commitlint
+            - checkout
       - commitlint:
           requires:
             - checkout
