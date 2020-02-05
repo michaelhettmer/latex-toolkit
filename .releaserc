@@ -12,8 +12,9 @@
       "@semantic-release/git",
       {
         "assets": [
-          "dist/**",
+          "dist",
           "docs",
+          "templates",
           "package.json",
           "README.md"
         ]
@@ -23,9 +24,11 @@
       "@semantic-release/github",
       {
         "assets": [
-          "docs/**",
-          "dist/**",
-          "templates/**"
+          "dist",
+          "docs",
+          "templates",
+          "package.json",
+          "README.md"
         ]
       }
     ],
