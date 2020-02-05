@@ -1,1 +1,1 @@
-# Latex Starter
+# Latex Toolkit
