@@ -1,0 +1,14 @@
+{
+    "extends": [
+        "config:js-app",
+        ":automergeLinters",
+        ":automergeTesters",
+        ":automergeTypes",
+        ":automergePatch",
+        ":automergeMinor",
+        ":assignAndReview(MichaelHettmer)",
+        ":enableVulnerabilityAlertsWithLabel(vulnerability)",
+        ":renovatePrefix",
+        ":rebaseStalePrs"
+    ]
+}
