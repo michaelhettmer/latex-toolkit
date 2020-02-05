@@ -1,0 +1,25 @@
+{
+  "name": "latex-toolkit",
+  "version": "1.0.0",
+  "description": "An opinionated collection of LaTeX tools with configurable starter templates including CI/CD workflows.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MichaelHettmer/latex-toolkit.git"
+  },
+  "keywords": [
+    "latex",
+    "toolkit",
+    "cli",
+    "template"
+  ],
+  "author": "Michael Hettmer",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/MichaelHettmer/latex-toolkit/issues"
+  },
+  "homepage": "https://github.com/MichaelHettmer/latex-toolkit#readme"
+}
