@@ -49,6 +49,15 @@ jobs:
           root: ~/repo
           <<: *whitelist
 
+  commitlint:
+    <<: *defaults
+    steps:
+      - attach_workspace:
+          at: ~/repo
+      - run:
+          name: Lint relevant commit messages
+          command: npm run commitlint:ci
+
   lint:
     <<: *defaults
     steps:
