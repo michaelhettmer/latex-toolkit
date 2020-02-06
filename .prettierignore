@@ -1,4 +1,5 @@
-dist
+bin
 coverage
-templates
+dist
 node_modules
+templates

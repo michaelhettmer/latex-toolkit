@@ -1,5 +1,6 @@
-dist
+bin
 coverage
+dist
 templates
 
 # eslint ignores hidden files by default
