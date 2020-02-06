@@ -42,6 +42,7 @@
         "@semantic-release/changelog": "5.0.0",
         "@semantic-release/git": "9.0.0",
         "@types/jest": "25.1.1",
+        "@types/yargs": "^15.0.3",
         "@typescript-eslint/eslint-plugin": "2.19.0",
         "@typescript-eslint/parser": "2.19.0",
         "commitlint-circle": "1.0.0",
@@ -63,10 +64,14 @@
         "typescript": "3.7.5"
     },
     "dependencies": {
-        "tslib": "1.10.0"
+        "tslib": "1.10.0",
+        "yargs": "^15.1.0"
     },
     "engines": {
         "node": ">=8.0.0"
+    },
+    "bin": {
+        "latex-toolkit": "dist/index.js"
     },
     "files": [
         "/bin",

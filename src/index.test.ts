@@ -1,11 +1,17 @@
-import mockConsole from 'jest-mock-console';
-import { entry } from '.';
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import yargs = require('yargs');
 
-describe('test placeholder', () => {
-    it('should call console.log once and return 0', () => {
-        mockConsole('log');
-        const result = entry();
-        expect(console.log).toHaveBeenCalledTimes(1);
-        expect(result).toBe(0);
+it('returns help output', async () => {
+    // Initialize parser using the command module
+    const parser = yargs.commandDir('./commands').help();
+
+    // Run the command module with --help as argument
+    const output = await new Promise(resolve => {
+        parser.parse('--help', (err: any, argv: any, output: any) => {
+            resolve(output);
+        });
     });
+
+    // Verify the output is correct
+    expect(output).toMatch(/version.*?help|help.*?version/s);
 });
