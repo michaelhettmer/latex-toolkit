@@ -138,6 +138,7 @@ workflows:
           requires:
             - test
             - lint
+            - commitlint
       - release:
           requires:
             - build
