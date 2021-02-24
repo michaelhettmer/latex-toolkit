@@ -3,7 +3,7 @@ version: 2.1
 defaults: &defaults
   working_directory: ~/repo
   docker:
-    - image: circleci/node:12.20.2
+    - image: circleci/node:12.21.0
 
 whitelist: &whitelist
   paths:
