@@ -29,7 +29,7 @@ whitelist: &whitelist
     - tsconfig.json
 
 orbs:
-  codecov: codecov/codecov@1.2.5
+  codecov: codecov/codecov@3.2.3
 
 jobs:
   checkout:
